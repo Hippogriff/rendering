@@ -6,8 +6,9 @@ Usage:
 ````Python
 import trimesh
 from matplotlib import pyplot as plt
-mesh = trimesh.load("../selfsup-proj/objs/160372_3.obj")
 from render import render_mesh
+
+mesh = trimesh.load("path-to-file.obj")
 images = render_mesh(mesh)
 plt.imshow(images[20])
 ````
