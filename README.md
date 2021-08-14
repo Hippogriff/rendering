@@ -1,5 +1,5 @@
 # rendering
-Quick trimesh headless rendering. Supports depth map, normal map, ray to mesh intersection point and triangle ids.
+Quick trimesh headless rendering for meshes. Supports depth map, normal map, ray to mesh intersection point and triangle ids.
 
 Usage:
 
