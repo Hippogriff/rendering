@@ -41,9 +41,7 @@ class Render:
         else:
             self.camera_poses = camera_poses
 
-    def render(self, path, clean=True, intensity=6.0, mesh=None, only_render_images=False):
-        # TODO
-        # segmentation label transfer
+    def render(self, path, clean=True, intensity=6.0, mesh=None, only_render_images=False, if_correct_normals=True):
         if not isinstance(mesh, trimesh.Trimesh):
             mesh = prepare_mesh(path, color=False, clean=clean)
         try:
@@ -56,9 +54,10 @@ class Render:
         t1 = time.time()
         triangle_ids, normal_maps, depth_images, p_images = None, None, None, None
         if not only_render_images:
-            # TODO Normals are not normalized.
-            triangle_ids, normal_maps, depth_images, p_images = correct_normals(mesh, self.camera_poses, correct=True)
-        rendered_images, _ = pyrender_rendering(
+            # NOTE Normals are not normalized.
+            triangle_ids, normal_maps, _, p_images = correct_normals(mesh, self.camera_poses,
+                                                                                correct=if_correct_normals)
+        rendered_images, depth_images = pyrender_rendering(
                 mesh1, viz=False, light=True, camera_poses=self.camera_poses, intensity=intensity
             )
         print(time.time() - t1)
