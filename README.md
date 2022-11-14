@@ -9,6 +9,8 @@ from matplotlib import pyplot as plt
 from render import render_mesh
 
 mesh = trimesh.load("path-to-file.obj")
-images = render_mesh(mesh)
-plt.imshow(images[20])
+images, camera_poses = render_mesh(mesh, resolution=128, if_correct_normals=False)
+triangle_ids, rendered_images, normal_maps, depth_images, p_images = images
+
+plt.imshow(rendered_images[20])
 ````
